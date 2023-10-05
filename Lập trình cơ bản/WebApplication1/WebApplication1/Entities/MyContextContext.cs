@@ -12,5 +12,8 @@ namespace WebApplication1.Entities
         }
 
         public virtual DbSet<Todo> totos { get; set; }
+        public virtual DbSet<User> users { get; set; }
+        public virtual DbSet<Vehicle> vehicles { get; set; }
+
     }
 }

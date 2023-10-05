@@ -4,7 +4,9 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<form method="post">
+    <div class="text-center">
+        <a asp-page="/TodoAdd">Thêm</a>
     <table class="table table-striped">
         <tr>
             <th>Id</th>
@@ -23,11 +25,13 @@
                 <td><p>@item.Status</p></td>
                 <td><p>@item.StartDate</p></td>
                 <td>
-                    <button>Sửa</button>
-                    <button>Xóa</button>
+                        <a asp-page="/TodoAdd" asp-route-id="@item.Id">Sửa</a>
+                    <button type="submit" asp-page-handler="delete" asp-route-id="@item.Id">Xóa</button>
                 </td>
             </tr>
         }
     </table>
     
 </div>
+</form>
+
