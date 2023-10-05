@@ -1,0 +1,21 @@
+﻿@page
+@using WebApplication1.Entities;
+@model WebApplication1.Pages.UserAddModel
+
+ <form method="post">
+	<input type="hidden" asp-for="UserData!.Id" />
+	 <div>
+		 <span>
+			 Name
+		 </span>
+		<input type="text" id="name" asp-for="UserData!.Name" />
+	 </div>
+	<div>
+		<span>
+			BirthDay
+		</span>
+		<input type="date" id="birthday" asp-for="UserData!.Birthday" />
+	</div>
+
+	<input type="submit" value="Lưu" />
+ </form>

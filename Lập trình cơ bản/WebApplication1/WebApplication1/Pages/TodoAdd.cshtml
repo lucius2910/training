@@ -1,0 +1,60 @@
+﻿@page
+@using WebApplication1.Entities;
+@using WebApplication1.Utils;
+@model WebApplication1.Pages.TodoAddModel
+
+<form method="post">
+	<input type="hidden" asp-for="TodoData!.Id" />
+	<div>
+		<span>
+			Title
+		</span>
+		<input type="text" id="Title" asp-for="TodoData!.Title" />
+	</div>
+	<div>
+		<span>
+			Content
+		</span>
+		<input type="text" id="Content" asp-for="TodoData!.Content" />
+	</div>
+	
+	<div>
+		<span>
+			Status
+		</span>
+		<select asp-for="TodoData!.Status">
+			<option value="@TodoStatus.DOING">@TodoStatus.DOING</option>
+			<option value="@TodoStatus.SUCCESS">@TodoStatus.SUCCESS</option>
+			<option value="@TodoStatus.TODO">@TodoStatus.TODO</option>
+		</select>
+	</div>
+	
+	<div>
+		<span>
+			StartDate
+		</span>
+		<input type="date" id="StartDate" asp-for="TodoData!.StartDate" />
+	</div>
+
+	<div>
+		<span>
+			StartDate
+		</span>
+		<input type="date" id="EndDate" asp-for="TodoData!.EndDate" />
+	</div>
+	<div>
+		<span>
+			TaskName
+		</span>
+	
+		<select asp-for="TodoData!.TaskName">
+			<option value="@TodoTaskName.CONG_VIEC">@TodoTaskName.CONG_VIEC</option>
+			<option value="@TodoTaskName.HOC_TAP">@TodoTaskName.HOC_TAP</option>
+			
+		</select>
+		
+	</div>
+	
+
+	<input type="submit" value="Lưu" />
+</form>

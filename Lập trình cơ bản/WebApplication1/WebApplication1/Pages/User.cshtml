@@ -1,0 +1,33 @@
+﻿@page
+@model UserModel
+@{
+    ViewData["Title"] = "User page";
+}
+
+<form method="post">
+<div class="text-center">
+    <a asp-page="/UserAdd">Thêm</a>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>BirthDay</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model.datas)
+        {
+            <tr>
+                <td><p>@item.Id</p></td>
+                <td><p>@item.Name</p></td>
+                <td><p>@item.Birthday</p></td>
+                <td>
+                    <a asp-page="/UserAdd" asp-route-id="@item.Id">Sửa</a>
+                    <button type="submit" asp-page-handler="delete" asp-route-id="@item.Id">Xóa</button>
+                </td>
+            </tr>
+        }
+    </table>
+    
+</div>
+</form>
