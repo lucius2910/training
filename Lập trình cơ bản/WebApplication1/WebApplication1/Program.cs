@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Entities;
+using WebApplication1.Interfaces;
+using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<MyContextContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
 });
+
+// Register dependence injection
+builder.Services.AddScoped<ITodoServices, TodoServices>();
+//builder.Services.AddTransient<ITodoServices, TodoServices>();
+//builder.Services.AddSingleton<ITodoServices, TodoServices>();
 
 var app = builder.Build();
 
