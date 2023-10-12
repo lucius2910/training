@@ -1,0 +1,32 @@
+﻿@page
+@model VehicleModel
+@{
+    ViewData["Title"] = "Vehicle page";
+}
+<form method="post">
+    <div class="text-center">
+        <a asp-page="/VehicleAdd">Thêm</a>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>UserId</th>
+                <th>Name</th>
+                <th>ExpriedDate</th>
+            </tr>
+            @foreach (var item in Model.datas)
+            {
+                <tr>
+                    <td><p>@item.Id</p></td>
+                    <td><p>@item.UserId</p></td>
+                    <td><p>@item.Name</p></td>
+                    <td><p>@item.ExpriedDate</p></td>
+                    <td>
+                        <a asp-page="/VehicleAdd" asp-route-id="@item.Id">Sửa</a>
+                        <button type="submit" asp-page-handler="delete" asp-route-id="@item.Id">Xóa</button>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</form>

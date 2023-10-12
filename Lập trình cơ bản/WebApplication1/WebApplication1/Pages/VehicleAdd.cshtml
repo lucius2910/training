@@ -1,0 +1,30 @@
+﻿@page
+@using Services.Entities;
+@model WebApplication1.Pages.VehicleAddModel
+
+<form method="post">
+	<input type="hidden" asp-for="VehicleData!.Id" />
+	<div>
+		<span>
+			Name
+		</span>
+		<input type="text" id="name" asp-for="VehicleData!.Name" />
+	</div>
+	<div>
+		<span>
+			User
+		</span>
+		<select asp-items="@(new SelectList(Model.users, "Id", "Name"))"  asp-for="VehicleData!.UserId">
+
+		</select>
+	</div>
+	<div>
+		<div>
+			<span>
+				ExpriedDate
+			</span>
+			<input type="date" id="ExpriedDate" asp-for="VehicleData!.ExpriedDate" />
+		</div>
+
+	<input type="submit" value="Lưu" />
+</form>
