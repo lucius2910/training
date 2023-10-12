@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Entities;
-using WebApplication1.Interfaces;
-using WebApplication1.Services;
+using Services.Entities;
+using Services.Interfaces;
+using Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,9 @@ builder.Services.AddDbContext<MyContextContext>(options => {
 
 // Register dependence injection
 builder.Services.AddScoped<ITodoServices, TodoServices>();
+builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IVehicleServices, VehicleServices>();
+
 //builder.Services.AddTransient<ITodoServices, TodoServices>();
 //builder.Services.AddSingleton<ITodoServices, TodoServices>();
 

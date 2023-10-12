@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebApplication1.Entires;
-using WebApplication1.Interfaces;
+using Services.Entires;
+using Services.Interfaces;
 
 namespace WebApplication1.Pages
 {

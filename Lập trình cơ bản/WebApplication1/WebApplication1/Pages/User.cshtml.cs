@@ -1,35 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Entities;
+using Services.Entities;
+using Services.Interfaces;
+using Services.Services;
 
 namespace WebApplication1.Pages
 {
     public class UserModel : PageModel
     {
         private readonly ILogger<UserModel> _logger;
-        private MyContextContext _db;
+		private IUserServices _userService;
 
-        public List<User> datas { get; set; }
+		public List<User> datas { get; set; }
 
-        public UserModel(ILogger<UserModel> logger, MyContextContext db)
+        public UserModel(ILogger<UserModel> logger, IUserServices userServices)
         {
-            _logger = logger;
-            _db = db;
-        }
+			_userService = userServices;
+			_logger = logger;
+		}
 
         public void OnGet()
         {
-            this.datas = _db.users.ToList();
-        }
+			this.datas = _userService.GetList();
+		}
 
         public async Task<IActionResult> OnPostDelete(int id)
         {
-            var userDel = await _db.users.Where(x => x.Id == id).FirstOrDefaultAsync();
-            _db.users.Remove(userDel);
-            await _db.SaveChangesAsync();
-
-            return RedirectToPage("./User");
-        }
+			await _userService.Delete(id);
+			return RedirectToPage("./User");
+		}
     }
 }
