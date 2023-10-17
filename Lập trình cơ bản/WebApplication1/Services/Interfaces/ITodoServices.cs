@@ -36,6 +36,7 @@ namespace Services.Interfaces
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public Task<int> Update(Todo data);
+        public Task<int> Update(int id, Todo data);
+
     }
 }
