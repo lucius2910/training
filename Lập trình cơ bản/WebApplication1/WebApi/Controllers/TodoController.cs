@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Services.Entires;
-using Services.Entities;
 using Services.Interfaces;
-using Services.Services;
+using Services.Request;
+using Services.Response;
 
 namespace WebApi.Controllers
 {
@@ -11,10 +13,12 @@ namespace WebApi.Controllers
 	public class TodoController : ControllerBase
 	{
 		private ITodoServices _todoService { get; set; }
+		private IMapper _mapper { get; set; }
 
-		public TodoController(ITodoServices todoService)
+		public TodoController(ITodoServices todoService, IMapper mapper)
         {
 			_todoService = todoService;
+            _mapper = mapper;
 		}
 
 		
@@ -22,19 +26,36 @@ namespace WebApi.Controllers
 		[Route("")]
 		public IActionResult Get() {
 			var todos = _todoService.GetList();
-			if(todos.Count > 0)
-				return Ok(todos);
+
+            var itemResponse = _mapper.Map<List<TodoResponse>>(todos);
+
+            if (itemResponse.Count > 0)
+				return Ok(itemResponse);
 			else
-				return BadRequest(todos);
+				return BadRequest(itemResponse);
 		}
 
-		[HttpPut]
+		[HttpPost]
 		[Route("add-new")]
-		public async Task<IActionResult> AddNew([FromBody] Todo item)
+		public async Task<IActionResult> AddNew([FromBody] TodoRequest item)
 		{
-			var rowFetched = await _todoService.Add(item);
+            var validator = new TodoRequestValidator();
+
+            // Execute the validator.
+            ValidationResult results = validator.Validate(item);
+
+            // Inspect any validation failures.
+            bool success = results.IsValid;
+            List<ValidationFailure> failures = results.Errors;
+			if(failures.Count > 0)
+                return BadRequest(failures);
+
+            //  Convert TodoRequest => Todo
+            var itemDB = _mapper.Map<Todo>(item);
+
+            var rowFetched = await _todoService.Add(itemDB);
 			if (rowFetched > 0)
-				return Ok(new {message = "add success"});
+				return Ok(new { message = "add success" });
 			else
 				return BadRequest(new { message = "add fail" });
 		}

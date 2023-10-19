@@ -23,6 +23,6 @@ namespace Services.Entires
         public TodoStatus? Status { get; set; }
 
         public TodoTaskName? TaskName  { get; set; }
-}
+    }
 
 }

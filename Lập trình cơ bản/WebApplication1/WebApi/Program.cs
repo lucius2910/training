@@ -1,7 +1,9 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Services.Entities;
 using Services.Interfaces;
 using Services.Services;
+using WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,13 @@ builder.Services.AddDbContext<MyContextContext>(options => {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
 });
 
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+//builder.Services.AddScoped<IValidator<TodoRequest>, TodoRequestValidator>();
+builder.Services.AddFluentValidationAutoValidation(c =>
+{
+    c.DisableDataAnnotationsValidation = true;
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -35,6 +44,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+// global error handler
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.MapControllers();
 
