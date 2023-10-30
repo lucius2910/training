@@ -1,0 +1,26 @@
+﻿@page
+@model WebApplication4.Pages.LopModel
+@{
+    ViewData["Title"] = "Lop";
+}
+
+<div class="text-center">
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>MaLop</th>
+            <th>Ten</th>
+           
+        </tr>
+        @foreach (var item in Model.datas)
+        {
+            <tr>
+                <td><p>@item.Id</p></td>
+                <td><p>@item.MaLop</p></td>
+                <td><p>@item.Ten</p></td>
+               
+            </tr>
+
+        }
+
+

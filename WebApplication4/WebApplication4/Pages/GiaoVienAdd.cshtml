@@ -1,0 +1,29 @@
+﻿@page
+@using Services.Entities;
+@model WebApplication4.Pages.GiaoVienAddModel
+
+<form method="post">
+	<input type="hidden" asp-for="GiaoVienData!.Id" />
+	<div>
+		<span>
+			Ma
+		</span>
+		<input type="text" id="Ma" asp-for="GiaoVienData!.Ma" />
+	</div>
+	<div>
+		<span>
+			Ten
+		</span>
+		<input type="text" id="Ten" asp-for="GiaoVienData!.Ten" />
+	</div>
+
+	<div>
+		<span>
+			LopId
+		</span>
+		<input type="text" id="Ten" asp-for="GiaoVienData!.LopId" />
+	</div>
+
+
+	<input type="submit" value="Lưu" />
+</form>
