@@ -16,7 +16,7 @@ namespace Services.Service
 
         public List<Lop> GetList()
         {
-            var lopss = _db.lops.ToList();
+            var lopss = _db.lops.Include( x=> x.HocSinhs).Include(x=> x.Giaoviens).ToList();
 
             return lopss;
         }
@@ -50,9 +50,6 @@ namespace Services.Service
             lop.MaLop = data.MaLop;
             lop.Ten = data.Ten;
           
-
-
-
             // Update
             _db.lops.Update(data);
             return await _db.SaveChangesAsync();

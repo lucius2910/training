@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Services.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,6 +18,8 @@ namespace Services.Entires
 		[Column(TypeName = "nvarchar")]
 		[MaxLength(100)]
 		public string Ten { get; set; }
-		
-	}
+
+        public ICollection<Hocsinh>? HocSinhs { get; set; }
+        public ICollection<Giaovien>? Giaoviens { get; set; }
+    }
 }

@@ -3,11 +3,11 @@ using Services.Entities;
 using Services.Interfaces;
 using Services.Service;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 // Add services to the container.
-//builder.Services.AddRazorPages();
 
 // Databse
 var connectionString = configuration.GetConnectionString("Database");
@@ -20,7 +20,10 @@ builder.Services.AddDbContext<MyContextContext>(builder =>
     builder.LogTo(Console.WriteLine);
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+                .AddJsonOptions(x =>
+                    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+                );
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

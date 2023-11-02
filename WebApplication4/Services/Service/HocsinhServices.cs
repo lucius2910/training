@@ -16,7 +16,7 @@ namespace Services.Service
 
         public List<Hocsinh> GetList()
         {
-            var hocsinhss = _db.hocsinhs.ToList();
+            var hocsinhss = _db.hocsinhs.Include(x => x.Lop).ToList();
 
             return hocsinhss;
         }
