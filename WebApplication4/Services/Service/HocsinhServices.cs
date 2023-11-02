@@ -47,7 +47,6 @@ namespace Services.Service
             var hocsinh = await this.Find(id);
             if (hocsinh == null) return 0;
 
-            hocsinh.Id = data.Id;
             hocsinh.Ma = data.Ma;
             hocsinh.Ten = data.Ten;
             hocsinh.LopId = data.LopId;

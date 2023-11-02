@@ -47,7 +47,6 @@ namespace Services.Service
             var lop = await this.Find(id);
             if (lop == null) return 0;
 
-            lop.Id = data.Id;
             lop.MaLop = data.MaLop;
             lop.Ten = data.Ten;
           

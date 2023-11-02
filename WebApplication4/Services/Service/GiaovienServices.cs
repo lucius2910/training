@@ -47,7 +47,7 @@ namespace Services.Service
             var giaovien = await this.Find(id);
             if (giaovien == null) return 0;
 
-            giaovien.Id = data.Id;
+    
             giaovien.Ma = data.Ma;
             giaovien.Ten = data.Ten;
             giaovien.LopId = data.LopId;
